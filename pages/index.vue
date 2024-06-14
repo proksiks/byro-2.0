@@ -176,12 +176,12 @@
           },
         });
         $gsap.from(".title-text", 1.5, {
-          y: -100,
+          y: 100,
           opacity: 0,
           height: 0,
           ease: "power4.out",
           delay: 1,
-          skewY: -7,
+          skewY: 7,
           stagger: {
             amount: 0.3,
           },

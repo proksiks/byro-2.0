@@ -1,126 +1,128 @@
 <template>
   <Transition name="fade">
-    <div class="fixed w-full h-full top-0 left-0 z-20 overflow-auto" v-if="show">
+    <div class="fixed w-full h-full top-0 left-0 z-20" v-if="show">
       <div class="absolute w-full h-full pointer-events-none bg-blue-dark opacity-60"></div>
       <div class="relative h-full bg-white md:mt-0 mt-[15%] rounded-t-lg md:rounded-none">
-        <div class="px-4 pt-15 max-w-[1100px] relative md:static bg-white" v-if="!sucess">
-          <div class="w-[40px] h-[2px] absolute left-[50%] translate-x-[-50%] top-2 bg-gray-base rounded-sm"></div>
-          <h2 class="text-[27px] lg:text-xl font-extrabold uppercase md:mb-10 mb-5">Поработать вместе</h2>
-          <div class="md:flex mb-12 gap-5">
-            <p class="text-[14px] lg:text-md font-medium max-w-[516px]">
-              Наши клиенты — смелые, требовательные и талантливые команды, общими проектами с которыми мы гордимся.
-            </p>
-            <p class="text-[14px] mt-5 md:mt-0 lg:text-md font-medium max-w-[516px]">
-              Мы забираем продукт на стадии участка земли и помогаем понять, что с ним делать. Придумать, как он будет
-              выглядеть, что будет внутри и как его продать с премией к рынку — задача для Бюро.
-            </p>
-          </div>
-          <div>
-            <div class="text-[14px] md:text-md text-blue mb-5 max-w-[515px]">
-              Расскажите о задаче подробнее — мы свяжемся с вами и ответим на все вопросы.
+        <div class=" overflow-auto h-full" v-if="!sucess">
+          <div class="px-4 pt-15 max-w-[1050px] relative md:static bg-white">
+            <div class="w-[40px] h-[2px] absolute left-[50%] translate-x-[-50%] top-2 bg-gray-base rounded-sm md:hidden"></div>
+            <h2 class="text-[27px] lg:text-xl font-extrabold uppercase md:mb-10 mb-5">Поработать вместе</h2>
+            <div class="md:flex mb-12 gap-5">
+              <p class="text-[14px] lg:text-md font-medium max-w-[516px]">
+                Наши клиенты — смелые, требовательные и талантливые команды, общими проектами с которыми мы гордимся.
+              </p>
+              <p class="text-[14px] mt-5 md:mt-0 lg:text-md font-medium max-w-[516px]">
+                Мы забираем продукт на стадии участка земли и помогаем понять, что с ним делать. Придумать, как он будет
+                выглядеть, что будет внутри и как его продать с премией к рынку — задача для Бюро.
+              </p>
             </div>
-
-            <div class="flex gap-2 flex-wrap">
-              <label
-                v-for="(tag, i) in tags"
-                class="transition-all cursor-pointer has-[:checked]:bg-blue has-[:checked]:text-white text-blue-dark border border-blue px-3.5 py-2.5 rounded-xl leading-none"
-                :for="`tag-${i}`"
-              >
-                <input
-                  v-model="form.tags"
-                  type="checkbox"
-                  class="absolute pointer-events-none opacity-0 -left-[10000px]"
-                  :id="`tag-${i}`"
-                  :value="tag"
-                />
-                <span class="text-[12px] md:text-xs hidden md:block">{{ tag.text }}</span>
-                <span class="text-[12px] md:text-xs md:hidden">{{ tag.mobileText ? tag.mobileText : tag.text }}</span>
-              </label>
+            <div>
+              <div class="text-[14px] md:text-md text-blue mb-5 max-w-[515px]">
+                Расскажите о задаче подробнее — мы свяжемся с вами и ответим на все вопросы.
+              </div>
+  
+              <div class="flex gap-2 flex-wrap">
+                <label
+                  v-for="(tag, i) in tags"
+                  class="transition-all cursor-pointer has-[:checked]:bg-blue has-[:checked]:text-white text-blue-dark border border-blue px-3.5 py-2.5 rounded-xl leading-none"
+                  :for="`tag-${i}`"
+                >
+                  <input
+                    v-model="form.tags"
+                    type="checkbox"
+                    class="absolute pointer-events-none opacity-0 -left-[10000px]"
+                    :id="`tag-${i}`"
+                    :value="tag"
+                  />
+                  <span class="text-[12px] md:text-xs hidden md:block">{{ tag.text }}</span>
+                  <span class="text-[12px] md:text-xs md:hidden">{{ tag.mobileText ? tag.mobileText : tag.text }}</span>
+                </label>
+              </div>
+              <form @submit.prevent="submitForm">
+                <div class="mt-8 mb-3">
+                  <lable class="w-full text-md relative block">
+                    <input
+                      v-model="form.name"
+                      class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent"
+                      placeholder="Имя"
+                      type="text"
+                    />
+                    <span v-if="!isFormCorrect && !v$.form.name.required.$response" class="text-sm text-orange">
+                      {{ v$.form.name.required.$message }}
+                    </span>
+                    <span v-else-if="!isFormCorrect && !v$.form.name.isValidString.$response" class="text-sm text-orange">
+                      {{ v$.form.name.isValidString.$message }}
+                    </span>
+                  </lable>
+  
+                  <lable class="w-full mt-8 w-full text-md relative block">
+                    <input
+                      v-model="form.company"
+                      class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent"
+                      placeholder="Компания"
+                      type="text"
+                    />
+                    <span v-if="!isFormCorrect && !v$.form.company.required.$response" class="text-sm text-orange">
+                      {{ v$.form.company.required.$message }}
+                    </span>
+                  </lable>
+                  <lable class="w-full mt-8 w-full text-md relative block">
+                    <input
+                      v-model="form.phone"
+                      v-maska
+                      data-maska="+7 (###) ###-##-##"
+                      class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent"
+                      placeholder="Телефон"
+                      type="text"
+                    />
+                    <div v-if="!isFormCorrect && !v$.form.phone.required.$response" class="text-sm text-orange">
+                      {{ v$.form.phone.required.$message }}
+                    </div>
+                    <div v-else-if="!isFormCorrect && !v$.form.phone.minLength.$response" class="text-sm text-orange">
+                      {{ v$.form.phone.minLength.$message }}
+                    </div>
+                  </lable>
+                  <lable class="w-full mt-8 w-full text-md relative block">
+                    <input
+                      v-model="form.messanger"
+                      class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent"
+                      placeholder="Телеграм"
+                      type="text"
+                    />
+                    <span v-if="!isFormCorrect && !v$.form.messanger.required.$response" class="text-sm text-orange">
+                      {{ v$.form.messanger.required.$message }}
+                    </span>
+                  </lable>
+                  <lable class="w-full mt-8 w-full text-md relative block">
+                    <textarea
+                      v-model="form.description"
+                      class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent resize-none"
+                      placeholder="Немного о проекте"
+                      type="text"
+                    />
+                    <span v-if="!isFormCorrect && !v$.form.description.required.$response" class="text-sm text-orange">
+                      {{ v$.form.description.required.$message }}
+                    </span>
+                  </lable>
+                </div>
+  
+                <div class="flex items-center justify-between pb-5 md:pb-0 mb-[15%]">
+                  <button class="transition-all text-blue hover:text-orange active:text-blue mb-3">
+                    Отправить заявку
+                  </button>
+                  <img
+                    class="max-w-[87px] xl:max-w-full relative md:absolute md:right-5 md:bottom-5"
+                    src="/images/icons/big-heart.svg"
+                    alt="Иконка большого синего сердца"
+                  />
+                </div>
+              </form>
             </div>
-            <form @submit.prevent="submitForm">
-              <div class="mt-8 mb-3">
-                <lable class="w-full text-md relative block">
-                  <input
-                    v-model="form.name"
-                    class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent"
-                    placeholder="Имя"
-                    type="text"
-                  />
-                  <span v-if="!isFormCorrect && !v$.form.name.required.$response" class="text-sm text-orange">
-                    {{ v$.form.name.required.$message }}
-                  </span>
-                  <span v-else-if="!isFormCorrect && !v$.form.name.isValidString.$response" class="text-sm text-orange">
-                    {{ v$.form.name.isValidString.$message }}
-                  </span>
-                </lable>
-
-                <lable class="w-full mt-8 w-full text-md relative block">
-                  <input
-                    v-model="form.company"
-                    class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent"
-                    placeholder="Компания"
-                    type="text"
-                  />
-                  <span v-if="!isFormCorrect && !v$.form.company.required.$response" class="text-sm text-orange">
-                    {{ v$.form.company.required.$message }}
-                  </span>
-                </lable>
-                <lable class="w-full mt-8 w-full text-md relative block">
-                  <input
-                    v-model="form.phone"
-                    v-maska
-                    data-maska="+7 (###) ###-##-##"
-                    class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent"
-                    placeholder="Телефон"
-                    type="text"
-                  />
-                  <div v-if="!isFormCorrect && !v$.form.phone.required.$response" class="text-sm text-orange">
-                    {{ v$.form.phone.required.$message }}
-                  </div>
-                  <div v-else-if="!isFormCorrect && !v$.form.phone.minLength.$response" class="text-sm text-orange">
-                    {{ v$.form.phone.minLength.$message }}
-                  </div>
-                </lable>
-                <lable class="w-full mt-8 w-full text-md relative block">
-                  <input
-                    v-model="form.messanger"
-                    class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent"
-                    placeholder="Телеграм"
-                    type="text"
-                  />
-                  <span v-if="!isFormCorrect && !v$.form.messanger.required.$response" class="text-sm text-orange">
-                    {{ v$.form.messanger.required.$message }}
-                  </span>
-                </lable>
-                <lable class="w-full mt-8 w-full text-md relative block">
-                  <textarea
-                    v-model="form.description"
-                    class="placeholder:text-blue-dark text-[14px] md:text-md transition-all border-b outline-none py-2 border-gray-light focus:border-blue w-[inherit] h-[inherit] bg-transparent resize-none"
-                    placeholder="Немного о проекте"
-                    type="text"
-                  />
-                  <span v-if="!isFormCorrect && !v$.form.description.required.$response" class="text-sm text-orange">
-                    {{ v$.form.description.required.$message }}
-                  </span>
-                </lable>
-              </div>
-
-              <div class="flex items-center justify-between pb-5 md:pb-0">
-                <button class="transition-all text-blue hover:text-orange active:text-blue mb-3">
-                  Отправить заявку
-                </button>
-                <img
-                  class="max-w-[87px] xl:max-w-full relative md:absolute md:right-5 md:bottom-5"
-                  src="/images/icons/big-heart.svg"
-                  alt="Иконка большого синего сердца"
-                />
-              </div>
-            </form>
           </div>
         </div>
         <Transition name="fade">
           <div class="absolute w-full h-full bg-white top-0 left-0 z-30 overflow-auto" v-if="sucess">
-            <div class="w-[40px] h-[2px] absolute left-[50%] translate-x-[-50%] top-2 bg-gray-base rounded-sm"></div>
+            <div class="w-[40px] h-[2px] absolute left-[50%] translate-x-[-50%] top-2 bg-gray-base rounded-sm md:hidden"></div>
             <div class="relative h-full">
               <img
                 class="max-w-[87px] xl:max-w-full absolute right-5 md:bottom-5 bottom-20"
