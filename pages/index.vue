@@ -52,46 +52,44 @@
         <ul class="md:pl-2">
           <li class="overflow-hidden">
             <div class="nav-list-item">
-              <nuxt-link class="block font-medium hover:text-orange" to="#"> Исследования </nuxt-link>
+              Исследования
             </div>
           </li>
           <li class="overflow-hidden mt-1">
             <div class="nav-list-item">
-              <nuxt-link class="block transition-all font-medium hover:text-orange" to="#"> Продукт </nuxt-link>
+               Продукт
             </div>
           </li>
           <li class="overflow-hidden mt-1">
             <div class="nav-list-item">
-              <nuxt-link class="block transition-all font-medium hover:text-orange" to="#"> Архитектура </nuxt-link>
+               Архитектура
             </div>
           </li>
           <li class="overflow-hidden mt-1">
             <div class="nav-list-item">
-              <nuxt-link class="block transition-all font-medium hover:text-orange" to="#"
-                >Стртегии и креатив</nuxt-link
-              >
+              Стртегии и креатив
             </div>
           </li>
           <li class="overflow-hidden mt-1">
             <div class="nav-list-item">
-              <nuxt-link class="block transition-all font-medium hover:text-orange" to="#"> Брендинг </nuxt-link>
+               Брендинг 
             </div>
           </li>
           <li class="overflow-hidden mt-1">
             <div class="nav-list-item">
-              <nuxt-link class="block transition-all font-medium hover:text-orange" to="#"> Сайты </nuxt-link>
+               Сайты 
             </div>
           </li>
           <li class="overflow-hidden mt-1">
             <div class="nav-list-item">
-              <nuxt-link class="block transition-all font-medium hover:text-orange" to="#">
+              
                 Реклама и контент
-              </nuxt-link>
+              
             </div>
           </li>
           <li class="overflow-hidden mt-1">
             <div class="nav-list-item">
-              <nuxt-link class="block transition-all font-medium hover:text-orange" to="#"> Продажи </nuxt-link>
+               Продажи 
             </div>
           </li>
         </ul>
