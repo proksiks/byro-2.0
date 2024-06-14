@@ -1,11 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  //app: {
-  //  baseURL: "/byro-2.0.github.io/",
-  //},
-  vite: {
-    base: "/byro-2.0.github.io/",
+  app: {
+    baseURL: "/byro-2.0.github.io/",
   },
+  //vite: {
+  //  base: "/byro-2.0.github.io/",
+  //},
   css: ['normalize.css', 'vue-final-modal/style.css'],
   modules: [
     '@nuxt/eslint',

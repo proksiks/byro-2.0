@@ -1,107 +1,130 @@
 <template>
-  <div class="loader">
-    <div
-      class="loader-container"
-      style="--loader-dot-color: #051d34; --loader-dot-size: 50px; --loader-dot-spacing: 25px"
-    >
-      <div class="loader-dots">
-        <div class="loader-dot moving-dot"></div>
-        <div class="loader-dot fixed-dot"></div>
-        <div class="loader-dot fixed-dot"></div>
-        <div class="loader-dot fixed-dot"></div>
-      </div>
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none">
-        <defs>
-          <filter id="gooey">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7" />
-          </filter>
-        </defs>
-      </svg>
+  <div class="spinner">
+    <div class="spinner-container container1">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+      <div class="circle3"></div>
+      <div class="circle4"></div>
+    </div>
+    <div class="spinner-container container2">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+      <div class="circle3"></div>
+      <div class="circle4"></div>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .loader {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: white;
-  }
-  .loader-dots {
-    width: calc(calc(var(--loader-dot-size, 16px) * 4) + calc(calc(var(--loader-dot-spacing, 8px)) * 3));
-    height: var(--loader-dot-size, 16px);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    filter: url("#gooey");
+  .spinner {
+    display: none;
+    margin: 100px auto;
+    width: 100px;
+    height: 100px;
+    position: relative;
   }
 
-  .loader-dot {
-    width: var(--loader-dot-size, 16px);
-    height: var(--loader-dot-size, 16px);
-    border-radius: 50%;
-    background-color: var(--loader-dot-color, #051d34);
+  .container1 > div,
+  .container2 > div,
+  .container3 > div {
+    width: 16px;
+    height: 16px;
+    border: 5px solid #333;
+    background-color: #fff;
+
+    border-radius: 100%;
     position: absolute;
+    -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+    animation: bouncedelay 1.2s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  .spinner .spinner-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .container2 {
+    -webkit-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+  }
+
+  .circle1 {
     top: 0;
-    bottom: 0;
     left: 0;
+  }
+  .circle2 {
+    top: 0;
     right: 0;
-    margin: auto;
+  }
+  .circle3 {
+    right: 0;
+    bottom: 0;
+  }
+  .circle4 {
+    left: 0;
+    bottom: 0;
   }
 
-  .loader-dot:first-child {
-    left: calc(0px -calc(calc(var(--loader-dot-size, 16px) * 4) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2))));
+  .container2 .circle1 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
   }
 
-  .loader-dot:nth-child(2) {
-    left: calc(0px - calc(var(--loader-dot-size, 16px) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2))));
+  .container1 .circle2 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
   }
 
-  .loader-dot:nth-child(3) {
-    left: calc(var(--loader-dot-size, 16px) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2)));
+  .container2 .circle2 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
   }
 
-  .loader-dot:last-child {
-    left: calc(
-      calc(var(--loader-dot-size, 16px) * 4) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2))
-    );
+  .container1 .circle3 {
+    -webkit-animation-delay: -0.6s;
+    animation-delay: -0.6s;
   }
 
-  .moving-dot {
-    animation: moving-dot var(--loader-animation-duration, 2.5s) ease infinite;
+  .container2 .circle3 {
+    -webkit-animation-delay: -0.5s;
+    animation-delay: -0.5s;
   }
 
-  .fixed-dot {
-    animation: fixed-dot var(--loader-animation-duration, 2.5s) ease infinite;
+  .container1 .circle4 {
+    -webkit-animation-delay: -0.3s;
+    animation-delay: -0.3s;
   }
 
-  @keyframes moving-dot {
-    50% {
-      transform: translateX(
-        calc(calc(var(--loader-dot-size, 16px) * 4) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2)))
-      );
-    }
+  .container2 .circle4 {
+    -webkit-animation-delay: -0.2s;
+    animation-delay: -0.2s;
+  }
 
+  @-webkit-keyframes bouncedelay {
+    0%,
+    80%,
     100% {
-      transform: translateX(0px);
+      -webkit-transform: scale(0.4);
+    }
+    40% {
+      -webkit-transform: scale(1);
     }
   }
 
-  @keyframes fixed-dot {
-    50% {
-      transform: translateX(
-        calc(
-          0px - calc(var(--loader-dot-size, 16px) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2)))
-        )
-      );
-    }
-
+  @keyframes bouncedelay {
+    0%,
+    80%,
     100% {
-      transform: translateX(0px);
+      transform: scale(0);
+      -webkit-transform: scale(0.25);
+    }
+    40% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
     }
   }
 </style>
