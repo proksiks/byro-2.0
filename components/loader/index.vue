@@ -54,16 +54,11 @@
   }
 
   .loader-dot:first-child {
-    left: calc(
-      0px -
-        calc(calc(var(--loader-dot-size, 16px) * 4) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2)))
-    );
+    left: calc(0px -calc(calc(var(--loader-dot-size, 16px) * 4) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2))));
   }
 
   .loader-dot:nth-child(2) {
-    left: calc(
-      0px - calc(var(--loader-dot-size, 16px) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2)))
-    );
+    left: calc(0px - calc(var(--loader-dot-size, 16px) + var(--loader-dot-spacing, calc(var(--loader-dot-size, 16px) / 2))));
   }
 
   .loader-dot:nth-child(3) {
