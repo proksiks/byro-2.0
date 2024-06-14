@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Travels";
+  src: url("~/assets/fonts/Travels/TTTravels-Regular.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Travels";
+  src: url("~/assets/fonts/Travels/TTTravels-Medium.woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Travels";
+  src: url("~/assets/fonts/Travels/TT-Travels-Next-Trial-ExtraBold.woff2");
+  font-weight: 800;
+}
+
+@layer base {
+  html {
+    @apply font-travels;
+    @apply text-blue-dark;
+    @apply font-medium;
+  }
+}
