@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   vite: {
-    base: 'byro-2.0',
+    base: 'byro-2.0.github.io',
   },
   css: ['normalize.css', 'vue-final-modal/style.css'],
   modules: [
